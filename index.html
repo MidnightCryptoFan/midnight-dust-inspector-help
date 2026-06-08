@@ -9,11 +9,8 @@
   <style>
     html { scroll-behavior: smooth; }
     .tile {
-      border-radius: 0.5rem;
-      border: 1px solid #e2e8f0;
-      background: #f8fafc;
-      padding: 0.625rem;
-      min-width: 110px;
+      border-radius: 0.5rem; border: 1px solid #e2e8f0;
+      background: #f8fafc; padding: 0.6rem; min-width: 110px;
     }
     .tile-label { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; }
     .tile-value { font-size: 0.8rem; font-weight: 600; margin-top: 3px; }
@@ -28,6 +25,38 @@
       width: 20px; height: 20px; border-radius: 50%;
       background: #6d28d9; color: #fff;
       font-size: 0.65rem; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+    }
+    .section-title {
+      font-size: 1.125rem; font-weight: 700;
+      border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .section-title { border-color: #334155; }
+    }
+    .card {
+      background: white; border: 1px solid #e2e8f0;
+      border-radius: 0.75rem; padding: 1rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .card { background: #0f172a; border-color: #334155; }
+    }
+    .badge-ok    { background:#dcfce7; color:#166534; }
+    .badge-warn  { background:#fef9c3; color:#854d0e; }
+    .badge-info  { background:#dbeafe; color:#1e40af; }
+    .badge-error { background:#fee2e2; color:#991b1b; }
+    @media (prefers-color-scheme: dark) {
+      .badge-ok    { background:#14532d; color:#86efac; }
+      .badge-warn  { background:#713f12; color:#fde68a; }
+      .badge-info  { background:#1e3a8a; color:#93c5fd; }
+      .badge-error { background:#7f1d1d; color:#fca5a5; }
+    }
+    .wallet-badge-good { background:#dcfce7; color:#166534; font-size:0.65rem; padding:1px 6px; border-radius:9999px; font-weight:600; }
+    .wallet-badge-ok   { background:#fef9c3; color:#854d0e; font-size:0.65rem; padding:1px 6px; border-radius:9999px; font-weight:600; }
+    .wallet-badge-no   { background:#fee2e2; color:#991b1b; font-size:0.65rem; padding:1px 6px; border-radius:9999px; font-weight:600; }
+    @media (prefers-color-scheme: dark) {
+      .wallet-badge-good { background:#14532d; color:#86efac; }
+      .wallet-badge-ok   { background:#713f12; color:#fde68a; }
+      .wallet-badge-no   { background:#7f1d1d; color:#fca5a5; }
     }
   </style>
 </head>
@@ -48,262 +77,348 @@
     </div>
   </header>
 
-  <main class="max-w-2xl mx-auto px-4 py-8 space-y-10">
+  <!-- Nav -->
+  <nav class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 overflow-x-auto">
+    <div class="max-w-2xl mx-auto px-4 py-2 flex gap-4 whitespace-nowrap text-xs">
+      <a href="#problems"  class="text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Problems</a>
+      <a href="#midnight"  class="text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Midnight</a>
+      <a href="#cardano"   class="text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Cardano</a>
+      <a href="#wallets"   class="text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Wallets</a>
+      <a href="#support"   class="text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Support</a>
+      <a href="#faq"       class="text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">FAQ</a>
+    </div>
+  </nav>
 
-    <!-- Problem picker -->
-    <div>
+  <main class="max-w-2xl mx-auto px-4 py-8 space-y-12">
+
+    <!-- ─── PROBLEM PICKER ─────────────────────────────────────────────────── -->
+    <section id="problems" class="scroll-mt-20">
       <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100">What's happening?</h1>
-      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Pick the situation that matches what you see.</p>
+      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Pick the situation that matches what you see in the Inspector.</p>
 
       <div class="mt-4 grid gap-2 sm:grid-cols-2">
-        <a href="#no-dust" class="group flex items-start gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-sm transition-all">
+        <a href="#no-dust" class="card flex items-start gap-3 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-sm transition-all">
           <span class="text-2xl mt-0.5">📉</span>
           <div>
-            <p class="font-semibold text-sm text-slate-800 dark:text-slate-100">My DUST is not growing</p>
+            <p class="font-semibold text-sm">My DUST is not growing</p>
             <p class="text-xs text-slate-500 mt-0.5">Not registered, cap full, or registration lost</p>
           </div>
         </a>
-        <a href="#waiting" class="group flex items-start gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-sm transition-all">
+        <a href="#waiting" class="card flex items-start gap-3 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-sm transition-all">
           <span class="text-2xl mt-0.5">⏳</span>
           <div>
-            <p class="font-semibold text-sm text-slate-800 dark:text-slate-100">I just registered / deregistered</p>
+            <p class="font-semibold text-sm">I just registered / deregistered</p>
             <p class="text-xs text-slate-500 mt-0.5">Nothing changed yet — is that normal?</p>
           </div>
         </a>
-        <a href="#duplicate" class="group flex items-start gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-sm transition-all">
+        <a href="#duplicate" class="card flex items-start gap-3 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-sm transition-all">
           <span class="text-2xl mt-0.5">⚠️</span>
           <div>
-            <p class="font-semibold text-sm text-slate-800 dark:text-slate-100">I see a warning or error</p>
+            <p class="font-semibold text-sm">I see a warning or error</p>
             <p class="text-xs text-slate-500 mt-0.5">Duplicate registration or indexer unavailable</p>
           </div>
         </a>
-        <a href="#vesting" class="group flex items-start gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-sm transition-all">
+        <a href="#vesting" class="card flex items-start gap-3 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-sm transition-all">
           <span class="text-2xl mt-0.5">🔒</span>
           <div>
-            <p class="font-semibold text-sm text-slate-800 dark:text-slate-100">I have locked NIGHT</p>
-            <p class="text-xs text-slate-500 mt-0.5">Airdrop vesting tile is visible</p>
+            <p class="font-semibold text-sm">I have locked NIGHT</p>
+            <p class="text-xs text-slate-500 mt-0.5">Airdrop Vesting tile is visible</p>
           </div>
         </a>
-        <a href="#all-good" class="group flex items-start gap-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-sm transition-all sm:col-span-2">
+        <a href="#wallet-issues" class="card flex items-start gap-3 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-sm transition-all">
+          <span class="text-2xl mt-0.5">👛</span>
+          <div>
+            <p class="font-semibold text-sm">My wallet won't connect</p>
+            <p class="text-xs text-slate-500 mt-0.5">Eternl, Lace, Nami or other wallet issues</p>
+          </div>
+        </a>
+        <a href="#all-good" class="card flex items-start gap-3 hover:border-violet-300 dark:hover:border-violet-700 hover:shadow-sm transition-all">
           <span class="text-2xl mt-0.5">✅</span>
           <div>
-            <p class="font-semibold text-sm text-slate-800 dark:text-slate-100">Everything looks fine — what do the numbers mean?</p>
-            <p class="text-xs text-slate-500 mt-0.5">Understanding the tiles and what to expect</p>
+            <p class="font-semibold text-sm">Everything looks fine</p>
+            <p class="text-xs text-slate-500 mt-0.5">What do the numbers and tiles mean?</p>
           </div>
         </a>
       </div>
-    </div>
 
-    <!-- ─── DUST NOT GROWING ──────────────────────────────────────────────── -->
-    <section id="no-dust" class="scroll-mt-20 space-y-4">
-      <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-2">
-        📉 My DUST is not growing
-      </h2>
+      <!-- Problems detail -->
+      <div class="mt-6 space-y-4">
 
-      <!-- Case A: Not registered -->
-      <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-4">
-        <p class="font-semibold text-sm">Case A — "Active Registration" tile shows: <span class="text-slate-500">Not registered</span></p>
-        <div class="mt-3 flex gap-2 flex-wrap">
-          <div class="tile">
-            <div class="tile-label">Night Balance</div>
-            <div class="tile-value" style="color:#0f766e">50,000 NIGHT</div>
-            <div class="tile-sub">counts toward DUST cap</div>
+        <div id="no-dust" class="card scroll-mt-20 space-y-4">
+          <p class="font-bold text-sm">📉 My DUST is not growing</p>
+
+          <div class="space-y-2">
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Case A — "Not registered"</p>
+            <div class="flex gap-2 flex-wrap">
+              <div class="tile"><div class="tile-label">Active Registration</div><div class="tile-value" style="color:#94a3b8">Not registered</div><div class="tile-sub">no DUST being generated</div></div>
+            </div>
+            <ol class="space-y-1.5 text-sm mt-2">
+              <li class="flex gap-2"><span class="step-num">1</span><span>Connect your Cardano wallet at the top of the Inspector.</span></li>
+              <li class="flex gap-2"><span class="step-num">2</span><span>Click <strong>Register now</strong>. Confirm the transaction in your wallet.</span></li>
+              <li class="flex gap-2"><span class="step-num">3</span><span>Wait 5–15 minutes and click Refresh.</span></li>
+            </ol>
           </div>
-          <div class="tile">
-            <div class="tile-label">Active Registration</div>
-            <div class="tile-value" style="color:#94a3b8">Not registered</div>
-            <div class="tile-sub">no DUST being generated</div>
-          </div>
-        </div>
-        <ol class="mt-3 space-y-1.5 text-sm">
-          <li class="flex gap-2"><span class="step-num">1</span><span>Connect your Cardano wallet (Eternl, Nami, Lace) at the top of the Inspector.</span></li>
-          <li class="flex gap-2"><span class="step-num">2</span><span>Click <strong>Register now</strong> — this sends a small on-chain transaction.</span></li>
-          <li class="flex gap-2"><span class="step-num">3</span><span>Wait 5–15 minutes and refresh. The indexer needs time to pick it up.</span></li>
-        </ol>
-      </div>
 
-      <!-- Case B: Cap full -->
-      <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-4">
-        <p class="font-semibold text-sm">Case B — Registered but capacity shows <span class="text-amber-600 dark:text-amber-400">0 / 100</span></p>
-        <div class="mt-3 flex gap-2 flex-wrap">
-          <div class="tile">
-            <div class="tile-label">Active Registration</div>
-            <div class="tile-value" style="color:#d97706">Cap reached</div>
-            <div class="tile-sub">0 / 100 remaining</div>
-          </div>
-        </div>
-        <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">Your DUST wallet is full. Spend or transfer some DUST in your Midnight wallet to free up capacity — generation resumes automatically. No re-registration needed.</p>
-      </div>
-    </section>
-
-    <!-- ─── JUST REGISTERED / DEREGISTERED ──────────────────────────────── -->
-    <section id="waiting" class="scroll-mt-20 space-y-4">
-      <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-2">
-        ⏳ I just registered / deregistered and nothing changed
-      </h2>
-
-      <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-4 space-y-3 text-sm">
-        <p>This is normal. The Midnight indexer can lag behind the Cardano blockchain by <strong>a few minutes to several hours</strong>. Your transaction is already on-chain — the Inspector just needs to catch up.</p>
-
-        <div class="rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 px-3 py-2.5 text-amber-800 dark:text-amber-300">
-          After deregistration, the Inspector may still show "Registered" for a while. This is the indexer lag — not a problem.
-        </div>
-
-        <div class="flex gap-2 flex-wrap mt-1">
-          <div class="tile">
-            <div class="tile-label">Active Registration</div>
-            <div class="tile-value" style="color:#d97706">Deregistering…</div>
-            <div class="tile-sub">indexer catching up</div>
+          <div class="space-y-2 border-t border-slate-100 dark:border-slate-800 pt-4">
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Case B — Registered but DUST cap is full</p>
+            <div class="flex gap-2 flex-wrap">
+              <div class="tile"><div class="tile-label">Active Registration</div><div class="tile-value" style="color:#d97706">Cap reached</div><div class="tile-sub">0 / 100 remaining</div></div>
+            </div>
+            <p class="text-sm text-slate-600 dark:text-slate-400">Your Midnight wallet is full of DUST. Spend or transfer some DUST — generation resumes automatically. No re-registration needed.</p>
           </div>
         </div>
 
-        <p>Wait 15–60 minutes, then click <strong>Refresh</strong>. If it still hasn't updated after a few hours, check <a href="https://github.com/MidnightCryptoFan/midnight-dust-inspector/issues" target="_blank" class="text-violet-600 dark:text-violet-400 underline">GitHub Issues</a> for any known outages.</p>
-      </div>
-    </section>
-
-    <!-- ─── WARNING / ERROR ──────────────────────────────────────────────── -->
-    <section id="duplicate" class="scroll-mt-20 space-y-4">
-      <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-2">
-        ⚠️ I see a warning or error
-      </h2>
-
-      <!-- Duplicate -->
-      <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-4">
-        <p class="font-semibold text-sm">Duplicate / multiple registrations detected</p>
-        <div class="mt-2 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 px-3 py-2 text-sm text-red-800 dark:text-red-300">
-          ⚠ Multiple registrations detected for this stake address.
+        <div id="waiting" class="card scroll-mt-20 space-y-3">
+          <p class="font-bold text-sm">⏳ I just registered / deregistered and nothing changed</p>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Normal. The Midnight indexer lags behind the Cardano chain by <strong>minutes to several hours</strong>. Your transaction is already on-chain.</p>
+          <div class="flex gap-2 flex-wrap">
+            <div class="tile"><div class="tile-label">Active Registration</div><div class="tile-value" style="color:#d97706">Deregistering…</div><div class="tile-sub">indexer catching up</div></div>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Wait 15–60 minutes and click Refresh. Do not submit another transaction.</p>
         </div>
-        <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">This happens when NIGHT arrives in an already-registered wallet, causing the protocol to create a second registration automatically.</p>
-        <ol class="mt-2 space-y-1.5 text-sm">
-          <li class="flex gap-2"><span class="step-num">1</span><span>Connect your wallet and click <strong>Deregister</strong>.</span></li>
-          <li class="flex gap-2"><span class="step-num">2</span><span>Wait for confirmation (a few minutes).</span></li>
-          <li class="flex gap-2"><span class="step-num">3</span><span>Click <strong>Register now</strong> once the state shows "Not registered".</span></li>
-        </ol>
-      </div>
 
-      <!-- Indexer error -->
-      <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-4">
-        <p class="font-semibold text-sm">Indexer unavailable</p>
-        <div class="mt-2 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 px-3 py-2 text-sm text-amber-800 dark:text-amber-300">
-          The Midnight indexer could not be reached. Try again in a few minutes.
+        <div id="duplicate" class="card scroll-mt-20 space-y-3">
+          <p class="font-bold text-sm">⚠️ Warning: duplicate / multiple registrations</p>
+          <div class="rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 px-3 py-2 text-sm text-red-800 dark:text-red-300">⚠ Multiple registrations detected for this stake address.</div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Happens when NIGHT arrives in an already-registered wallet — the protocol auto-creates a second registration.</p>
+          <ol class="space-y-1.5 text-sm">
+            <li class="flex gap-2"><span class="step-num">1</span><span>Connect your wallet → click <strong>Deregister</strong>.</span></li>
+            <li class="flex gap-2"><span class="step-num">2</span><span>Wait for on-chain confirmation (~5 min).</span></li>
+            <li class="flex gap-2"><span class="step-num">3</span><span>Click <strong>Register now</strong> once state shows "Not registered".</span></li>
+          </ol>
         </div>
-        <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">This is temporary and does not affect your registration or NIGHT. Wait a few minutes and click Refresh.</p>
+
+        <div id="vesting" class="card scroll-mt-20 space-y-3">
+          <p class="font-bold text-sm">🔒 Airdrop Vesting tile</p>
+          <div class="flex gap-2 flex-wrap">
+            <div class="tile"><div class="tile-label">Airdrop Vesting</div><div class="tile-value" style="color:#d97706">5.75k NIGHT</div><div class="tile-sub">thaw in 35d 6h</div></div>
+            <div class="tile"><div class="tile-label">Airdrop Vesting</div><div class="tile-value" style="color:#d97706">5.75k NIGHT</div><div class="tile-sub">Now</div><div class="mt-1.5 text-xs font-semibold" style="color:#0d9488">Claim NIGHT now →</div></div>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400"><strong>Countdown running:</strong> Wait. Your NIGHT unlocks when the timer hits zero.</p>
+          <p class="text-sm text-slate-600 dark:text-slate-400"><strong>Shows "Now":</strong> Click <strong>Claim NIGHT now →</strong> to go to <a href="https://redeem.midnight.gd" target="_blank" class="text-violet-600 dark:text-violet-400 underline">redeem.midnight.gd</a> and claim your tokens.</p>
+          <div class="rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 px-3 py-2 text-xs text-amber-800 dark:text-amber-300">After claiming, check the Inspector again — new NIGHT arriving in a registered wallet can create a duplicate registration.</div>
+        </div>
+
+        <div id="all-good" class="card scroll-mt-20 space-y-3">
+          <p class="font-bold text-sm">✅ Reading the tiles</p>
+          <div class="flex gap-2 flex-wrap">
+            <div class="tile"><div class="tile-label">Night Balance</div><div class="tile-value" style="color:#0f766e">94.11k NIGHT</div><div class="tile-sub">counts toward DUST cap</div></div>
+            <div class="tile"><div class="tile-label">Active Registration</div><div class="tile-value" style="color:#16a34a">Registered ✓</div><div class="tile-sub">DUST is generating</div></div>
+          </div>
+          <div class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+            <p><strong class="text-slate-700 dark:text-slate-300">Night Balance</strong> — unlocked NIGHT in your wallet. Determines your DUST generation rate and cap.</p>
+            <p><strong class="text-slate-700 dark:text-slate-300">Airdrop Vesting</strong> — locked NIGHT in the vesting contract. Shown separately; does not count toward the cap until claimed.</p>
+            <p><strong class="text-slate-700 dark:text-slate-300">Active Registration</strong> — your current registration state. Green "Registered ✓" = DUST is accumulating now.</p>
+            <p><strong class="text-slate-700 dark:text-slate-300">Timeline</strong> — full history of your on-chain registrations and deregistrations.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- ─── LOCKED NIGHT ──────────────────────────────────────────────────── -->
-    <section id="vesting" class="scroll-mt-20 space-y-4">
-      <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-2">
-        🔒 I have locked NIGHT (Airdrop Vesting)
-      </h2>
+    <!-- ─── MIDNIGHT ───────────────────────────────────────────────────────── -->
+    <section id="midnight" class="scroll-mt-20">
+      <h2 class="section-title text-slate-900 dark:text-slate-100">🌙 The Midnight world</h2>
+      <div class="space-y-4 text-sm text-slate-600 dark:text-slate-400">
 
-      <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-4 space-y-3 text-sm">
-        <p>The <strong>Airdrop Vesting</strong> tile appears when part of your NIGHT comes from a vesting contract. These tokens are locked at a separate script address until each scheduled "thaw" date.</p>
-
-        <div class="flex gap-2 flex-wrap">
-          <div class="tile">
-            <div class="tile-label">Airdrop Vesting</div>
-            <div class="tile-value" style="color:#d97706">5.75k NIGHT</div>
-            <div class="tile-sub">thaw in 35d 6h</div>
-          </div>
-          <div class="tile">
-            <div class="tile-label">Airdrop Vesting</div>
-            <div class="tile-value" style="color:#d97706">5.75k NIGHT</div>
-            <div class="tile-sub">Now</div>
-            <div class="mt-1.5 text-xs font-semibold" style="color:#0d9488">Claim NIGHT now →</div>
-          </div>
+        <div class="card space-y-3">
+          <p class="font-semibold text-slate-800 dark:text-slate-200">What is Midnight?</p>
+          <p>Midnight is a data-protection blockchain built alongside Cardano. It uses zero-knowledge proofs to let you transact privately. It has its own wallet, its own tokens, and its own network — but it is linked to Cardano for its registration mechanism.</p>
         </div>
 
-        <div class="space-y-2">
-          <p><strong>Countdown running:</strong> Your NIGHT unlocks automatically when the timer reaches zero. No action needed until then.</p>
-          <p><strong>Claimable (shows "Now"):</strong> Click <strong>Claim NIGHT now →</strong> to go to <a href="https://redeem.midnight.gd" target="_blank" class="text-violet-600 dark:text-violet-400 underline">redeem.midnight.gd</a> and complete the claim.</p>
+        <div class="card space-y-3">
+          <p class="font-semibold text-slate-800 dark:text-slate-200">What is DUST?</p>
+          <p>DUST is the native utility token of the Midnight network. It is generated automatically once you register your NIGHT-holding Cardano stake key. DUST accumulates in your Midnight wallet over time — you do not need to manually trigger or claim it.</p>
+          <p>DUST is used to pay for transactions on the Midnight network.</p>
         </div>
 
-        <div class="rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 px-3 py-2.5 text-amber-800 dark:text-amber-300">
-          <strong>After claiming:</strong> Check the Inspector again. Receiving new NIGHT into a registered wallet can sometimes trigger a duplicate registration — de-register and re-register if that happens.
+        <div class="card space-y-3">
+          <p class="font-semibold text-slate-800 dark:text-slate-200">What is the Midnight indexer?</p>
+          <p>The Midnight indexer is a service that reads Cardano blockchain data and reports registration states to the Midnight network. The Inspector queries this indexer to check your current status.</p>
+          <p>The indexer can lag behind the Cardano chain by minutes to several hours. This is why the Inspector also cross-references the actual on-chain Cardano state via Koios — so you can see both views at once.</p>
         </div>
 
-        <p class="text-xs text-slate-500 dark:text-slate-400">The locked NIGHT does not count toward your DUST cap while it is in the vesting contract. It will be included once claimed.</p>
+        <div class="card space-y-3">
+          <p class="font-semibold text-slate-800 dark:text-slate-200">What is a DUST address?</p>
+          <p>Your DUST address is the address on the Midnight network where your generated DUST is sent. It is tied to your Midnight wallet — not your Cardano wallet. When you register, you link your Cardano stake key to a specific DUST address.</p>
+          <p>If you connect your Midnight wallet to the Inspector, it shows whether your registered DUST address matches your connected Midnight wallet. A mismatch means DUST may be going to a different Midnight address than expected.</p>
+        </div>
+
       </div>
     </section>
 
-    <!-- ─── ALL GOOD ──────────────────────────────────────────────────────── -->
-    <section id="all-good" class="scroll-mt-20 space-y-4">
-      <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-2">
-        ✅ Everything looks fine — what do the numbers mean?
-      </h2>
+    <!-- ─── CARDANO ─────────────────────────────────────────────────────────── -->
+    <section id="cardano" class="scroll-mt-20">
+      <h2 class="section-title text-slate-900 dark:text-slate-100">🔵 The Cardano world</h2>
+      <div class="space-y-4 text-sm text-slate-600 dark:text-slate-400">
 
-      <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-4 space-y-4 text-sm">
-        <div class="flex gap-2 flex-wrap">
-          <div class="tile">
-            <div class="tile-label">Night Balance</div>
-            <div class="tile-value" style="color:#0f766e">94.11k NIGHT</div>
-            <div class="tile-sub">counts toward DUST cap</div>
-          </div>
-          <div class="tile">
-            <div class="tile-label">Active Registration</div>
-            <div class="tile-value" style="color:#16a34a">Registered ✓</div>
-            <div class="tile-sub">DUST is generating</div>
-          </div>
+        <div class="card space-y-3">
+          <p class="font-semibold text-slate-800 dark:text-slate-200">What is a stake address?</p>
+          <p>A Cardano stake address (starts with <code class="bg-slate-100 dark:bg-slate-800 px-1 rounded">stake1…</code>) represents your staking identity. All payment addresses in the same wallet share the same stake address. NIGHT held across all those payment addresses is summed together for DUST generation.</p>
+          <p>You can find your stake address in any Cardano wallet under <em>Receive</em>, <em>Account</em>, or <em>Staking</em> details.</p>
         </div>
 
-        <div class="space-y-3 text-slate-600 dark:text-slate-400">
-          <div>
-            <p class="font-semibold text-slate-700 dark:text-slate-300">Night Balance</p>
-            <p>The total NIGHT in your regular wallet addresses. This is what the protocol uses to calculate your DUST generation rate and cap. Higher NIGHT = more DUST per day.</p>
-          </div>
-          <div>
-            <p class="font-semibold text-slate-700 dark:text-slate-300">Active Registration</p>
-            <p>Shows whether your NIGHT is registered for DUST generation. "Registered ✓" means DUST is accumulating in your Midnight wallet right now.</p>
-          </div>
-          <div>
-            <p class="font-semibold text-slate-700 dark:text-slate-300">Airdrop Vesting (only visible if you have locked NIGHT)</p>
-            <p>NIGHT from the airdrop that is still locked in a vesting contract. It does not count toward your DUST cap until you claim it.</p>
-          </div>
-          <div>
-            <p class="font-semibold text-slate-700 dark:text-slate-300">The Timeline</p>
-            <p>The bottom section shows the full history of your registrations and deregistrations. Useful to diagnose duplicate registration issues or verify when a change took effect.</p>
-          </div>
+        <div class="card space-y-3">
+          <p class="font-semibold text-slate-800 dark:text-slate-200">What is NIGHT?</p>
+          <p>NIGHT is Midnight's token that lives on the Cardano blockchain. It is the basis for DUST generation: the more unlocked NIGHT under your registered stake key, the faster DUST accumulates and the higher your DUST cap.</p>
+          <p>Locked NIGHT — held in a vesting contract at a script address — does not count toward the cap until you claim it into your regular wallet.</p>
         </div>
+
+        <div class="card space-y-3">
+          <p class="font-semibold text-slate-800 dark:text-slate-200">What is registration?</p>
+          <p>Registration is an on-chain Cardano transaction that links your stake key (holding NIGHT) to a Midnight DUST address. Once registered, the Midnight network knows where to send your DUST.</p>
+          <p>You only need one active registration. Multiple registrations from the same stake key can cause issues — the Inspector will warn you if it detects this.</p>
+        </div>
+
+        <div class="card space-y-3">
+          <p class="font-semibold text-slate-800 dark:text-slate-200">What is the registration Timeline?</p>
+          <p>The Timeline section at the bottom of the Inspector shows a chronological history of all registration and deregistration transactions for your stake key, pulled directly from the Cardano blockchain via Koios. This is independent of the Midnight indexer and is always up to date.</p>
+        </div>
+
       </div>
     </section>
 
-    <!-- ─── FAQ ──────────────────────────────────────────────────────────── -->
-    <section class="space-y-3">
-      <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-2">Common questions</h2>
+    <!-- ─── WALLETS ─────────────────────────────────────────────────────────── -->
+    <section id="wallets" class="scroll-mt-20">
+      <h2 class="section-title text-slate-900 dark:text-slate-100">👛 Wallet compatibility</h2>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">The Inspector uses CIP-30 (the Cardano dApp connector standard) to connect to your Cardano wallet. Here is what to expect from each wallet.</p>
 
-      <div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 divide-y divide-slate-100 dark:divide-slate-800">
+      <div class="space-y-3">
+
+        <!-- Eternl -->
+        <div class="card space-y-2">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <p class="font-semibold text-slate-800 dark:text-slate-200">Eternl</p>
+            <span class="wallet-badge-good">Recommended</span>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">The most feature-complete Cardano wallet. Full CIP-30 support, reliable signing, and works well with this Inspector. Available as a browser extension (Chrome, Firefox, Brave) and as a mobile app.</p>
+          <div class="text-xs text-slate-500 dark:text-slate-400 space-y-1 pt-1 border-t border-slate-100 dark:border-slate-800">
+            <p><strong>Minimum version:</strong> 2.0 or higher. Always keep Eternl updated.</p>
+            <p><strong>Known issues:</strong> None relevant to this tool.</p>
+            <p><strong>Tip:</strong> If the connect button does not respond, disable other wallet extensions temporarily — multiple wallet extensions can conflict.</p>
+          </div>
+        </div>
+
+        <!-- Lace -->
+        <div class="card space-y-2">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <p class="font-semibold text-slate-800 dark:text-slate-200">Lace</p>
+            <span class="wallet-badge-ok">Works, some caveats</span>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">IOG's official Cardano wallet. Generally works for connecting and checking your balance, but has had occasional issues with signing transactions in some dApps.</p>
+          <div class="text-xs text-slate-500 dark:text-slate-400 space-y-1 pt-1 border-t border-slate-100 dark:border-slate-800">
+            <p><strong>Minimum version:</strong> 1.10 or higher recommended.</p>
+            <p><strong>Known issues:</strong> If the Register or Deregister transaction fails or hangs, switch to Eternl and try again.</p>
+            <p><strong>Tip:</strong> Make sure Lace is unlocked before clicking Connect in the Inspector.</p>
+          </div>
+        </div>
+
+        <!-- Nami -->
+        <div class="card space-y-2">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <p class="font-semibold text-slate-800 dark:text-slate-200">Nami</p>
+            <span class="wallet-badge-no">Deprecated — migrate</span>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Nami is no longer actively maintained. It may still connect but is not recommended for new transactions. Migrate your funds to Eternl or Lace.</p>
+          <div class="text-xs text-slate-500 dark:text-slate-400 space-y-1 pt-1 border-t border-slate-100 dark:border-slate-800">
+            <p><strong>Known issues:</strong> May fail to sign transactions on newer contract versions. No longer receives security updates.</p>
+          </div>
+        </div>
+
+        <!-- Vespr -->
+        <div class="card space-y-2">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <p class="font-semibold text-slate-800 dark:text-slate-200">Vespr</p>
+            <span class="wallet-badge-ok">Should work</span>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Mobile-first wallet with a desktop browser extension. CIP-30 is supported. Not as widely tested with this Inspector as Eternl.</p>
+          <div class="text-xs text-slate-500 dark:text-slate-400 space-y-1 pt-1 border-t border-slate-100 dark:border-slate-800">
+            <p><strong>Tip:</strong> If you run into issues, try Eternl as a fallback.</p>
+          </div>
+        </div>
+
+        <!-- General tips -->
+        <div id="wallet-issues" class="card scroll-mt-20 space-y-2 border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/20">
+          <p class="font-semibold text-slate-800 dark:text-slate-200">General wallet troubleshooting</p>
+          <ul class="space-y-1.5 text-sm text-slate-600 dark:text-slate-400">
+            <li class="flex gap-2"><span class="text-violet-500 font-bold flex-shrink-0">·</span><span><strong>Wallet not detected:</strong> Reload the page. The Inspector checks for wallet extensions on load — if you installed one after opening the page, a reload is needed.</span></li>
+            <li class="flex gap-2"><span class="text-violet-500 font-bold flex-shrink-0">·</span><span><strong>Multiple wallets installed:</strong> Only one should be active. Disable the others in your browser extension settings to avoid conflicts.</span></li>
+            <li class="flex gap-2"><span class="text-violet-500 font-bold flex-shrink-0">·</span><span><strong>Transaction rejected:</strong> Make sure you have at least 2–3 ADA in your wallet to cover transaction fees. Registration transactions are cheap but not free.</span></li>
+            <li class="flex gap-2"><span class="text-violet-500 font-bold flex-shrink-0">·</span><span><strong>Wrong network:</strong> Ensure your wallet is set to Cardano <strong>Mainnet</strong>, not Preprod or Preview testnet.</span></li>
+            <li class="flex gap-2"><span class="text-violet-500 font-bold flex-shrink-0">·</span><span><strong>Signing popup does not appear:</strong> Check if your browser blocked the popup. Allow popups for midnight-dust-inspector.vercel.app.</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── SUPPORT ─────────────────────────────────────────────────────────── -->
+    <section id="support" class="scroll-mt-20">
+      <h2 class="section-title text-slate-900 dark:text-slate-100">💜 Support this tool</h2>
+      <div class="card space-y-3 text-sm text-slate-600 dark:text-slate-400">
+        <p>This is a free, open-source community tool built and maintained by a Midnight community member. It has no ads, no paywalls, and no tracking beyond anonymised visit counts.</p>
+        <p>If you find it useful, you can send a tip (ADA or NIGHT) to the Cardano address below. Every contribution helps keep the tool free and actively developed.</p>
+        <div class="rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3 py-2.5 space-y-1">
+          <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">Tip address (ADA / NIGHT)</p>
+          <p class="font-mono text-xs break-all text-slate-700 dark:text-slate-300">addr1qyv69hnr0mft9adpzsukvst3lt33xv77fzxyc03g0z6k2984t3vksywnhmat59eg9ltexupat2hpp9cmwdns9j054ayqykv7ae</p>
+        </div>
+        <p>You can also <a href="https://github.com/MidnightCryptoFan/midnight-dust-inspector" target="_blank" class="text-violet-600 dark:text-violet-400 underline">star the repo on GitHub</a> or share the Inspector in the Midnight Discord — that helps just as much.</p>
+      </div>
+    </section>
+
+    <!-- ─── FAQ ─────────────────────────────────────────────────────────────── -->
+    <section id="faq" class="scroll-mt-20">
+      <h2 class="section-title text-slate-900 dark:text-slate-100">❓ FAQ</h2>
+      <div class="card divide-y divide-slate-100 dark:divide-slate-800">
+
         <details class="p-4 group">
-          <summary class="font-semibold text-sm cursor-pointer list-none flex justify-between items-center">
+          <summary class="font-semibold text-sm cursor-pointer list-none flex justify-between items-center gap-3">
             Is this tool safe? Can it access my funds?
-            <span class="text-slate-400 group-open:rotate-180 transition-transform ml-2 flex-shrink-0">▼</span>
+            <span class="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0">▼</span>
           </summary>
-          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-6">No. The Inspector only reads public blockchain data. It never requests your seed phrase or private keys. The source code is fully open on GitHub.</p>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-6">No. The Inspector only reads public blockchain data. It never requests your seed phrase or private keys. The wallet connection is only used to read your public key and submit transactions you explicitly sign. Source code is fully open on <a href="https://github.com/MidnightCryptoFan/midnight-dust-inspector" target="_blank" class="text-violet-600 dark:text-violet-400 underline">GitHub</a>.</p>
         </details>
 
         <details class="p-4 group">
-          <summary class="font-semibold text-sm cursor-pointer list-none flex justify-between items-center">
-            Can I check someone else's address?
-            <span class="text-slate-400 group-open:rotate-180 transition-transform ml-2 flex-shrink-0">▼</span>
+          <summary class="font-semibold text-sm cursor-pointer list-none flex justify-between items-center gap-3">
+            Can I check someone else's stake address?
+            <span class="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0">▼</span>
           </summary>
-          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-6">Yes — all data is public. Enter any <code class="bg-slate-100 dark:bg-slate-800 px-1 rounded">stake1…</code> address. You can view but not change anything without connecting the actual wallet.</p>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-6">Yes. All data shown is public on-chain information. Enter any <code class="bg-slate-100 dark:bg-slate-800 px-1 rounded">stake1…</code> address to check its state. You cannot register or deregister on someone else's behalf without connecting their wallet.</p>
         </details>
 
         <details class="p-4 group">
-          <summary class="font-semibold text-sm cursor-pointer list-none flex justify-between items-center">
+          <summary class="font-semibold text-sm cursor-pointer list-none flex justify-between items-center gap-3">
             The Inspector shows different data than my Midnight wallet. Why?
-            <span class="text-slate-400 group-open:rotate-180 transition-transform ml-2 flex-shrink-0">▼</span>
+            <span class="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0">▼</span>
           </summary>
-          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-6">The Midnight indexer can lag behind the Cardano blockchain by minutes to hours. The Inspector shows both the indexer view and the actual on-chain state so you can spot discrepancies.</p>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-6">The Midnight indexer can lag behind the Cardano chain by minutes to hours. The Inspector shows both the indexer view and the actual on-chain state via Koios independently — the Cardano timeline is always current.</p>
         </details>
 
         <details class="p-4 group">
-          <summary class="font-semibold text-sm cursor-pointer list-none flex justify-between items-center">
+          <summary class="font-semibold text-sm cursor-pointer list-none flex justify-between items-center gap-3">
+            Do I need a Midnight wallet to use this tool?
+            <span class="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0">▼</span>
+          </summary>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-6">No. You can check any stake address by just typing it in — no wallet connection needed. Connecting a Cardano wallet adds the ability to register and deregister. Connecting a Midnight wallet adds a live DUST balance display and lets the Inspector verify your DUST address.</p>
+        </details>
+
+        <details class="p-4 group">
+          <summary class="font-semibold text-sm cursor-pointer list-none flex justify-between items-center gap-3">
+            Why does receiving NIGHT create a duplicate registration?
+            <span class="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0">▼</span>
+          </summary>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-6">This is a known protocol behaviour. When new NIGHT arrives in an already-registered wallet, the Midnight protocol may auto-create a second registration entry. De-register and re-register once to resolve it. See the <a href="#duplicate" class="text-violet-600 dark:text-violet-400 underline">duplicate registration</a> section above.</p>
+        </details>
+
+        <details class="p-4 group">
+          <summary class="font-semibold text-sm cursor-pointer list-none flex justify-between items-center gap-3">
             Still stuck?
-            <span class="text-slate-400 group-open:rotate-180 transition-transform ml-2 flex-shrink-0">▼</span>
+            <span class="text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0">▼</span>
           </summary>
           <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-6">Open an issue on <a href="https://github.com/MidnightCryptoFan/midnight-dust-inspector/issues" target="_blank" class="text-violet-600 dark:text-violet-400 underline">GitHub</a> or find the community in the Midnight Network Discord.</p>
         </details>
+
       </div>
     </section>
 
