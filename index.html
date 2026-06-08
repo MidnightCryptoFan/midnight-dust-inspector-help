@@ -4,9 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Midnight DUST Inspector — Help Guide</title>
+  <script>
+    tailwind.config = { darkMode: 'media' }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
+
+    /* Tile mockup */
     .tile {
       border-radius: 0.5rem;
       border: 1px solid #e2e8f0;
@@ -22,28 +27,46 @@
       color: #94a3b8;
     }
     .tile-value { font-size: 0.875rem; font-weight: 600; margin-top: 4px; }
-    .tile-sub { font-size: 0.7rem; color: #64748b; margin-top: 2px; }
+    .tile-sub   { font-size: 0.7rem; color: #64748b; margin-top: 2px; }
+
+    @media (prefers-color-scheme: dark) {
+      .tile        { background: #1e293b; border-color: #334155; }
+      .tile-label  { color: #64748b; }
+      .tile-sub    { color: #475569; }
+    }
+
+    /* Step numbers */
+    .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #6d28d9; color: #fff;
+      font-size: 0.7rem; font-weight: 700;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* Badges */
     .badge-ok    { background:#dcfce7; color:#166534; }
     .badge-warn  { background:#fef9c3; color:#854d0e; }
     .badge-info  { background:#dbeafe; color:#1e40af; }
     .badge-error { background:#fee2e2; color:#991b1b; }
-    .step-num {
-      display:inline-flex; align-items:center; justify-content:center;
-      width:22px; height:22px; border-radius:50%;
-      background:#6d28d9; color:#fff; font-size:0.7rem; font-weight:700;
-      flex-shrink:0; margin-top:1px;
+
+    @media (prefers-color-scheme: dark) {
+      .badge-ok    { background:#14532d; color:#86efac; }
+      .badge-warn  { background:#713f12; color:#fde68a; }
+      .badge-info  { background:#1e3a8a; color:#93c5fd; }
+      .badge-error { background:#7f1d1d; color:#fca5a5; }
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 font-sans">
 
   <!-- Header -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-20">
+  <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-20">
     <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
       <div>
-        <span class="font-bold text-violet-700">DUST Inspector</span>
+        <span class="font-bold text-violet-600 dark:text-violet-400">DUST Inspector</span>
         <span class="text-slate-400 mx-2">·</span>
-        <span class="text-sm text-slate-500">Help Guide</span>
+        <span class="text-sm text-slate-500 dark:text-slate-400">Help Guide</span>
       </div>
       <a href="https://midnight-dust-inspector.vercel.app"
          target="_blank"
@@ -54,298 +77,296 @@
   </header>
 
   <!-- Navigation -->
-  <nav class="bg-white border-b border-slate-100">
+  <nav class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800">
     <div class="max-w-3xl mx-auto px-4 py-2 flex flex-wrap gap-x-4 gap-y-1">
-      <a href="#not-registered"       class="text-xs text-slate-500 hover:text-violet-600">Not Registered</a>
-      <a href="#registered-growing"   class="text-xs text-slate-500 hover:text-violet-600">Registered & Growing</a>
-      <a href="#cap-full"             class="text-xs text-slate-500 hover:text-violet-600">Cap Full</a>
-      <a href="#deregistration"       class="text-xs text-slate-500 hover:text-violet-600">Deregistration Pending</a>
-      <a href="#vesting-countdown"    class="text-xs text-slate-500 hover:text-violet-600">Vesting Countdown</a>
-      <a href="#vesting-claimable"    class="text-xs text-slate-500 hover:text-violet-600">Vesting Claimable</a>
-      <a href="#duplicate"            class="text-xs text-slate-500 hover:text-violet-600">Duplicate Registration</a>
-      <a href="#indexer-error"        class="text-xs text-slate-500 hover:text-violet-600">Indexer Error</a>
-      <a href="#faq"                  class="text-xs text-slate-500 hover:text-violet-600">FAQ</a>
+      <a href="#not-registered"     class="text-xs text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Not Registered</a>
+      <a href="#registered-growing" class="text-xs text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Registered & Growing</a>
+      <a href="#cap-full"           class="text-xs text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Cap Full</a>
+      <a href="#deregistration"     class="text-xs text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Deregistration Pending</a>
+      <a href="#vesting-countdown"  class="text-xs text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Vesting Countdown</a>
+      <a href="#vesting-claimable"  class="text-xs text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Vesting Claimable</a>
+      <a href="#duplicate"          class="text-xs text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Duplicate Registration</a>
+      <a href="#indexer-error"      class="text-xs text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">Indexer Error</a>
+      <a href="#faq"                class="text-xs text-slate-500 hover:text-violet-600 dark:hover:text-violet-400">FAQ</a>
     </div>
   </nav>
 
   <main class="max-w-3xl mx-auto px-4 py-8 space-y-4">
 
     <!-- Intro -->
-    <div class="rounded-xl bg-violet-50 border border-violet-200 p-5">
-      <h1 class="text-lg font-bold text-violet-900">Midnight DUST Inspector — Help Guide</h1>
-      <p class="mt-2 text-sm text-violet-800 leading-6">
+    <div class="rounded-xl bg-violet-50 dark:bg-violet-950/30 border border-violet-200 dark:border-violet-800 p-5">
+      <h1 class="text-lg font-bold text-violet-900 dark:text-violet-200">Midnight DUST Inspector — Help Guide</h1>
+      <p class="mt-2 text-sm text-violet-800 dark:text-violet-300 leading-6">
         This guide explains every state the Inspector can show, what it means, and what action — if any — you should take.
         The Inspector is read-only and non-custodial. It never has access to your seed phrase or private keys.
       </p>
     </div>
 
     <!-- ─── 1. NOT REGISTERED ─────────────────────────────────────────────── -->
-    <section id="not-registered" class="rounded-xl bg-white border border-slate-200 p-5 shadow-sm scroll-mt-20">
+    <section id="not-registered" class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-5 shadow-sm scroll-mt-20">
       <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-base font-bold text-slate-800">Not Registered</h2>
+        <h2 class="text-base font-bold">Not Registered</h2>
         <span class="text-xs font-semibold px-2 py-0.5 rounded-full badge-info">Info</span>
       </div>
 
-      <!-- Mockup -->
       <div class="mt-4 flex gap-2 flex-wrap">
         <div class="tile">
           <div class="tile-label">Night Balance</div>
-          <div class="tile-value text-teal-700">50,000 NIGHT</div>
+          <div class="tile-value" style="color:#0f766e">50,000 NIGHT</div>
           <div class="tile-sub">counts toward DUST cap</div>
         </div>
         <div class="tile">
           <div class="tile-label">Active Registration</div>
-          <div class="tile-value text-slate-500">Not registered</div>
+          <div class="tile-value" style="color:#94a3b8">Not registered</div>
           <div class="tile-sub">no DUST being generated</div>
         </div>
       </div>
-      <div class="mt-3 rounded-lg bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-700">
-        <span class="font-semibold">Register now</span> button is visible below the tiles.
+      <div class="mt-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2.5 text-sm text-slate-600 dark:text-slate-300">
+        A <strong>Register now</strong> button appears below the tiles when your wallet is connected.
       </div>
 
-      <div class="mt-4 space-y-2 text-sm text-slate-700">
+      <div class="mt-4 space-y-2 text-sm">
         <p><strong>What it means:</strong> Your wallet holds NIGHT but is not yet registered for DUST generation on the Midnight network.</p>
-        <p class="mt-3 font-semibold text-slate-600 text-xs uppercase tracking-wide">What to do</p>
+        <p class="mt-3 font-semibold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wide">What to do</p>
         <ol class="space-y-2 mt-1">
-          <li class="flex gap-2"><span class="step-num">1</span><span>Connect your Cardano wallet (Eternl, Nami, Lace) using the wallet button at the top.</span></li>
-          <li class="flex gap-2"><span class="step-num">2</span><span>Make sure your wallet holds at least some NIGHT tokens in this stake address.</span></li>
-          <li class="flex gap-2"><span class="step-num">3</span><span>Click <strong>Register now</strong>. This sends a small on-chain transaction to register your NIGHT for DUST generation.</span></li>
-          <li class="flex gap-2"><span class="step-num">4</span><span>Wait 5–15 minutes and refresh. The Midnight indexer needs a moment to pick up the new registration.</span></li>
+          <li class="flex gap-2"><span class="step-num">1</span><span>Connect your Cardano wallet (Eternl, Nami, Lace) using the wallet button.</span></li>
+          <li class="flex gap-2"><span class="step-num">2</span><span>Make sure your wallet holds NIGHT tokens at this stake address.</span></li>
+          <li class="flex gap-2"><span class="step-num">3</span><span>Click <strong>Register now</strong>. This sends a small on-chain transaction.</span></li>
+          <li class="flex gap-2"><span class="step-num">4</span><span>Wait 5–15 minutes and refresh. The Midnight indexer needs time to pick it up.</span></li>
         </ol>
       </div>
     </section>
 
     <!-- ─── 2. REGISTERED & GROWING ──────────────────────────────────────── -->
-    <section id="registered-growing" class="rounded-xl bg-white border border-slate-200 p-5 shadow-sm scroll-mt-20">
+    <section id="registered-growing" class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-5 shadow-sm scroll-mt-20">
       <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-base font-bold text-slate-800">Registered — DUST Growing</h2>
+        <h2 class="text-base font-bold">Registered — DUST Growing</h2>
         <span class="text-xs font-semibold px-2 py-0.5 rounded-full badge-ok">All good</span>
       </div>
 
       <div class="mt-4 flex gap-2 flex-wrap">
         <div class="tile">
           <div class="tile-label">Night Balance</div>
-          <div class="tile-value text-teal-700">94.11k NIGHT</div>
+          <div class="tile-value" style="color:#0f766e">94.11k NIGHT</div>
           <div class="tile-sub">counts toward DUST cap</div>
         </div>
         <div class="tile">
           <div class="tile-label">Active Registration</div>
-          <div class="tile-value text-emerald-600">Registered ✓</div>
+          <div class="tile-value" style="color:#16a34a">Registered ✓</div>
           <div class="tile-sub">DUST is generating</div>
         </div>
       </div>
-      <div class="mt-3 rounded-lg bg-emerald-50 border border-emerald-200 px-4 py-2.5 text-sm text-emerald-800">
+      <div class="mt-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 px-4 py-2.5 text-sm text-emerald-800 dark:text-emerald-300">
         DUST generation is active. Current capacity: 42 / 100.
       </div>
 
-      <div class="mt-4 space-y-2 text-sm text-slate-700">
+      <div class="mt-4 space-y-2 text-sm">
         <p><strong>What it means:</strong> Everything is working correctly. Your NIGHT is registered and DUST is accumulating in your Midnight wallet.</p>
-        <p class="mt-3 font-semibold text-slate-600 text-xs uppercase tracking-wide">What to do</p>
-        <p>Nothing — you are all set. DUST generates automatically as long as your NIGHT stays in the same wallet and the registration is active.</p>
-        <p class="mt-2 text-xs text-slate-500">Tip: Connect your Midnight wallet above to see your live DUST balance directly in the app.</p>
+        <p class="mt-3 font-semibold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wide">What to do</p>
+        <p>Nothing — you are all set. DUST generates automatically as long as your NIGHT stays in the same wallet.</p>
+        <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Tip: Connect your Midnight wallet to see your live DUST balance directly in the Inspector.</p>
       </div>
     </section>
 
     <!-- ─── 3. CAP FULL ──────────────────────────────────────────────────── -->
-    <section id="cap-full" class="rounded-xl bg-white border border-slate-200 p-5 shadow-sm scroll-mt-20">
+    <section id="cap-full" class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-5 shadow-sm scroll-mt-20">
       <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-base font-bold text-slate-800">Registered — DUST Cap Full</h2>
+        <h2 class="text-base font-bold">Registered — DUST Cap Full</h2>
         <span class="text-xs font-semibold px-2 py-0.5 rounded-full badge-info">Info</span>
       </div>
 
       <div class="mt-4 flex gap-2 flex-wrap">
         <div class="tile">
           <div class="tile-label">Night Balance</div>
-          <div class="tile-value text-teal-700">94.11k NIGHT</div>
+          <div class="tile-value" style="color:#0f766e">94.11k NIGHT</div>
           <div class="tile-sub">counts toward DUST cap</div>
         </div>
         <div class="tile">
           <div class="tile-label">Active Registration</div>
-          <div class="tile-value text-amber-600">Cap reached</div>
+          <div class="tile-value" style="color:#d97706">Cap reached</div>
           <div class="tile-sub">0 / 100 remaining</div>
         </div>
       </div>
 
-      <div class="mt-4 space-y-2 text-sm text-slate-700">
-        <p><strong>What it means:</strong> Your DUST capacity is full. The protocol has stopped generating new DUST until you spend or transfer some of the DUST already in your Midnight wallet.</p>
-        <p class="mt-3 font-semibold text-slate-600 text-xs uppercase tracking-wide">What to do</p>
+      <div class="mt-4 space-y-2 text-sm">
+        <p><strong>What it means:</strong> Your DUST capacity is full. The protocol has stopped generating new DUST until you spend some of the DUST already in your Midnight wallet.</p>
+        <p class="mt-3 font-semibold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wide">What to do</p>
         <ol class="space-y-2 mt-1">
-          <li class="flex gap-2"><span class="step-num">1</span><span>Open your Midnight wallet and spend or transfer some DUST to free up capacity.</span></li>
-          <li class="flex gap-2"><span class="step-num">2</span><span>Once capacity drops below the maximum, DUST generation resumes automatically.</span></li>
-          <li class="flex gap-2"><span class="step-num">3</span><span>No re-registration is needed — your existing registration stays active.</span></li>
+          <li class="flex gap-2"><span class="step-num">1</span><span>Open your Midnight wallet and spend or transfer some DUST.</span></li>
+          <li class="flex gap-2"><span class="step-num">2</span><span>Once capacity drops below the maximum, generation resumes automatically.</span></li>
+          <li class="flex gap-2"><span class="step-num">3</span><span>No re-registration needed.</span></li>
         </ol>
       </div>
     </section>
 
     <!-- ─── 4. DEREGISTRATION PENDING ────────────────────────────────────── -->
-    <section id="deregistration" class="rounded-xl bg-white border border-slate-200 p-5 shadow-sm scroll-mt-20">
+    <section id="deregistration" class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-5 shadow-sm scroll-mt-20">
       <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-base font-bold text-slate-800">Deregistration Pending</h2>
+        <h2 class="text-base font-bold">Deregistration Pending</h2>
         <span class="text-xs font-semibold px-2 py-0.5 rounded-full badge-warn">Waiting</span>
       </div>
 
       <div class="mt-4 flex gap-2 flex-wrap">
         <div class="tile">
           <div class="tile-label">Night Balance</div>
-          <div class="tile-value text-teal-700">94.11k NIGHT</div>
+          <div class="tile-value" style="color:#0f766e">94.11k NIGHT</div>
           <div class="tile-sub">counts toward DUST cap</div>
         </div>
         <div class="tile">
           <div class="tile-label">Active Registration</div>
-          <div class="tile-value text-amber-600">Deregistering…</div>
+          <div class="tile-value" style="color:#d97706">Deregistering…</div>
           <div class="tile-sub">indexer catching up</div>
         </div>
       </div>
-      <div class="mt-3 rounded-lg bg-amber-50 border border-amber-200 px-4 py-2.5 text-sm text-amber-800">
-        On-chain confirmed. The Midnight indexer is still catching up.
+      <div class="mt-3 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 px-4 py-2.5 text-sm text-amber-800 dark:text-amber-300">
+        On-chain confirmed. The Midnight indexer is still catching up — no action needed.
       </div>
 
-      <div class="mt-4 space-y-2 text-sm text-slate-700">
-        <p><strong>What it means:</strong> Your deregistration transaction has been confirmed on the Cardano blockchain, but the Midnight indexer has not processed it yet. This is normal — the indexer can lag by minutes to hours.</p>
-        <p class="mt-3 font-semibold text-slate-600 text-xs uppercase tracking-wide">What to do</p>
+      <div class="mt-4 space-y-2 text-sm">
+        <p><strong>What it means:</strong> Your deregistration is confirmed on Cardano, but the Midnight indexer hasn't processed it yet. This lag can range from minutes to hours — it is normal.</p>
+        <p class="mt-3 font-semibold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wide">What to do</p>
         <ol class="space-y-2 mt-1">
-          <li class="flex gap-2"><span class="step-num">1</span><span>Wait. The indexer will catch up automatically, usually within a few minutes to a few hours.</span></li>
-          <li class="flex gap-2"><span class="step-num">2</span><span>Refresh the Inspector periodically to check the updated state.</span></li>
+          <li class="flex gap-2"><span class="step-num">1</span><span>Wait. The indexer will update automatically.</span></li>
+          <li class="flex gap-2"><span class="step-num">2</span><span>Refresh the Inspector after 15–60 minutes to verify.</span></li>
           <li class="flex gap-2"><span class="step-num">3</span><span>Do not submit another transaction — the deregistration is already on-chain.</span></li>
         </ol>
       </div>
     </section>
 
     <!-- ─── 5. VESTING COUNTDOWN ─────────────────────────────────────────── -->
-    <section id="vesting-countdown" class="rounded-xl bg-white border border-slate-200 p-5 shadow-sm scroll-mt-20">
+    <section id="vesting-countdown" class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-5 shadow-sm scroll-mt-20">
       <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-base font-bold text-slate-800">Airdrop Vesting — Countdown</h2>
+        <h2 class="text-base font-bold">Airdrop Vesting — Countdown</h2>
         <span class="text-xs font-semibold px-2 py-0.5 rounded-full badge-info">Locked</span>
       </div>
 
       <div class="mt-4 flex gap-2 flex-wrap">
         <div class="tile">
           <div class="tile-label">Night Balance</div>
-          <div class="tile-value text-teal-700">88.36k NIGHT</div>
+          <div class="tile-value" style="color:#0f766e">88.36k NIGHT</div>
           <div class="tile-sub">counts toward DUST cap</div>
         </div>
         <div class="tile">
           <div class="tile-label">Airdrop Vesting</div>
-          <div class="tile-value text-amber-600">5.75k NIGHT</div>
+          <div class="tile-value" style="color:#d97706">5.75k NIGHT</div>
           <div class="tile-sub">thaw in 35d 6h</div>
         </div>
         <div class="tile">
           <div class="tile-label">Active Registration</div>
-          <div class="tile-value text-emerald-600">Registered ✓</div>
+          <div class="tile-value" style="color:#16a34a">Registered ✓</div>
           <div class="tile-sub">DUST is generating</div>
         </div>
       </div>
 
-      <div class="mt-4 space-y-2 text-sm text-slate-700">
-        <p><strong>What it means:</strong> A portion of your NIGHT comes from an airdrop vesting contract. These tokens are locked until the next scheduled "thaw" date. They are held at a separate script address and do <em>not</em> count toward your DUST cap.</p>
-        <p><strong>The countdown</strong> shows exactly how long until the next batch of NIGHT unlocks.</p>
-        <p class="mt-3 font-semibold text-slate-600 text-xs uppercase tracking-wide">What to do</p>
-        <p>Nothing yet. Wait for the countdown to reach zero, then claim your NIGHT using the button that appears.</p>
+      <div class="mt-4 space-y-2 text-sm">
+        <p><strong>What it means:</strong> A portion of your NIGHT comes from an airdrop vesting contract. These tokens are locked at a script address until the next scheduled "thaw" date. They do <em>not</em> count toward your DUST cap while locked.</p>
+        <p><strong>The countdown</strong> shows exactly how long until the next batch unlocks.</p>
+        <p class="mt-3 font-semibold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wide">What to do</p>
+        <p>Nothing yet — wait for the countdown to reach zero. A claim button will appear automatically.</p>
       </div>
     </section>
 
     <!-- ─── 6. VESTING CLAIMABLE ─────────────────────────────────────────── -->
-    <section id="vesting-claimable" class="rounded-xl bg-white border border-slate-200 p-5 shadow-sm scroll-mt-20">
+    <section id="vesting-claimable" class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-5 shadow-sm scroll-mt-20">
       <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-base font-bold text-slate-800">Airdrop Vesting — Claimable Now</h2>
+        <h2 class="text-base font-bold">Airdrop Vesting — Claimable Now</h2>
         <span class="text-xs font-semibold px-2 py-0.5 rounded-full badge-ok">Action available</span>
       </div>
 
       <div class="mt-4 flex gap-2 flex-wrap">
         <div class="tile">
           <div class="tile-label">Night Balance</div>
-          <div class="tile-value text-teal-700">88.36k NIGHT</div>
+          <div class="tile-value" style="color:#0f766e">88.36k NIGHT</div>
           <div class="tile-sub">counts toward DUST cap</div>
         </div>
         <div class="tile">
           <div class="tile-label">Airdrop Vesting</div>
-          <div class="tile-value text-amber-600">5.75k NIGHT</div>
+          <div class="tile-value" style="color:#d97706">5.75k NIGHT</div>
           <div class="tile-sub">Now</div>
-          <div class="mt-1">
-            <span class="text-xs font-semibold text-teal-600">Claim NIGHT now →</span>
+          <div class="mt-1.5">
+            <span class="text-xs font-semibold" style="color:#0d9488">Claim NIGHT now →</span>
           </div>
         </div>
         <div class="tile">
           <div class="tile-label">Active Registration</div>
-          <div class="tile-value text-emerald-600">Registered ✓</div>
+          <div class="tile-value" style="color:#16a34a">Registered ✓</div>
           <div class="tile-sub">DUST is generating</div>
         </div>
       </div>
 
-      <div class="mt-4 space-y-2 text-sm text-slate-700">
-        <p><strong>What it means:</strong> The thaw date has passed. Your locked NIGHT is now available to be claimed from the vesting contract and moved to your wallet.</p>
-        <p class="mt-3 font-semibold text-slate-600 text-xs uppercase tracking-wide">What to do</p>
+      <div class="mt-4 space-y-2 text-sm">
+        <p><strong>What it means:</strong> The thaw date has passed. Your locked NIGHT can now be claimed from the vesting contract.</p>
+        <p class="mt-3 font-semibold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wide">What to do</p>
         <ol class="space-y-2 mt-1">
           <li class="flex gap-2"><span class="step-num">1</span><span>Click <strong>Claim NIGHT now →</strong> in the Airdrop Vesting tile.</span></li>
-          <li class="flex gap-2"><span class="step-num">2</span><span>You will be taken to <a href="https://redeem.midnight.gd" target="_blank" class="text-violet-600 underline">redeem.midnight.gd</a> to complete the claim transaction.</span></li>
-          <li class="flex gap-2"><span class="step-num">3</span><span>After claiming, consider whether to re-register the newly unlocked NIGHT (if it arrived at the same wallet address, it may trigger an automatic re-registration).</span></li>
+          <li class="flex gap-2"><span class="step-num">2</span><span>Complete the claim at <a href="https://redeem.midnight.gd" target="_blank" class="text-violet-600 dark:text-violet-400 underline">redeem.midnight.gd</a>.</span></li>
+          <li class="flex gap-2"><span class="step-num">3</span><span>After claiming, check the Inspector again — receiving new NIGHT can sometimes trigger an automatic re-registration.</span></li>
         </ol>
-        <p class="mt-2 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800">
-          <strong>⚠️ Note:</strong> Receiving new NIGHT into an already-registered wallet can trigger an automatic re-registration, sometimes creating a second registration entry. Check the Inspector again after claiming to verify your registration state.
+        <p class="mt-3 p-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg text-xs text-amber-800 dark:text-amber-300">
+          <strong>⚠️ Note:</strong> Receiving NIGHT into an already-registered wallet can create a duplicate registration. Check the Inspector after claiming and de-register / re-register if needed.
         </p>
       </div>
     </section>
 
     <!-- ─── 7. DUPLICATE REGISTRATION ───────────────────────────────────── -->
-    <section id="duplicate" class="rounded-xl bg-white border border-slate-200 p-5 shadow-sm scroll-mt-20">
+    <section id="duplicate" class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-5 shadow-sm scroll-mt-20">
       <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-base font-bold text-slate-800">Duplicate / Multiple Registrations</h2>
+        <h2 class="text-base font-bold">Duplicate / Multiple Registrations</h2>
         <span class="text-xs font-semibold px-2 py-0.5 rounded-full badge-error">Action needed</span>
       </div>
 
-      <div class="mt-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-800 font-medium">
+      <div class="mt-4 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 px-4 py-3 text-sm text-red-800 dark:text-red-300 font-medium">
         ⚠ Multiple registrations detected for this stake address.
       </div>
 
-      <div class="mt-4 space-y-2 text-sm text-slate-700">
-        <p><strong>What it means:</strong> The Midnight indexer has found more than one active DUST registration linked to your stake key. This can happen when NIGHT is received into an already-registered wallet, causing the protocol to create a second registration automatically.</p>
-        <p>While this does not immediately break DUST generation, it is an unexpected state that should be resolved.</p>
-        <p class="mt-3 font-semibold text-slate-600 text-xs uppercase tracking-wide">What to do</p>
+      <div class="mt-4 space-y-2 text-sm">
+        <p><strong>What it means:</strong> The Midnight indexer has found more than one active DUST registration for your stake key. This typically happens when NIGHT arrives in an already-registered wallet, causing the protocol to create a second entry automatically.</p>
+        <p class="mt-3 font-semibold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wide">What to do</p>
         <ol class="space-y-2 mt-1">
           <li class="flex gap-2"><span class="step-num">1</span><span>Connect your Cardano wallet in the Inspector.</span></li>
-          <li class="flex gap-2"><span class="step-num">2</span><span>Click <strong>Deregister</strong> to remove the current registration.</span></li>
-          <li class="flex gap-2"><span class="step-num">3</span><span>Wait for the deregistration to be confirmed on-chain (a few minutes).</span></li>
-          <li class="flex gap-2"><span class="step-num">4</span><span>Register again once the state shows "Not registered".</span></li>
+          <li class="flex gap-2"><span class="step-num">2</span><span>Click <strong>Deregister</strong> to remove the current on-chain registration.</span></li>
+          <li class="flex gap-2"><span class="step-num">3</span><span>Wait for the deregistration to confirm (a few minutes).</span></li>
+          <li class="flex gap-2"><span class="step-num">4</span><span>Click <strong>Register now</strong> once the state shows "Not registered".</span></li>
         </ol>
-        <p class="mt-2 p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-600">
-          The Inspector's timeline section shows a full history of all your registrations and deregistrations, which can help understand when and how duplicates occurred.
+        <p class="mt-2 p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs text-slate-600 dark:text-slate-400">
+          The Timeline section at the bottom of the Inspector shows a full history of all registrations and deregistrations.
         </p>
       </div>
     </section>
 
     <!-- ─── 8. INDEXER ERROR ──────────────────────────────────────────────── -->
-    <section id="indexer-error" class="rounded-xl bg-white border border-slate-200 p-5 shadow-sm scroll-mt-20">
+    <section id="indexer-error" class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-5 shadow-sm scroll-mt-20">
       <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-base font-bold text-slate-800">Indexer Error / Unavailable</h2>
+        <h2 class="text-base font-bold">Indexer Error / Unavailable</h2>
         <span class="text-xs font-semibold px-2 py-0.5 rounded-full badge-warn">Temporary</span>
       </div>
 
-      <div class="mt-4 rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 text-sm text-amber-800">
+      <div class="mt-4 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 px-4 py-2.5 text-sm text-amber-800 dark:text-amber-300">
         The Midnight indexer could not be reached. Try again in a few minutes.
       </div>
 
-      <div class="mt-4 space-y-2 text-sm text-slate-700">
-        <p><strong>What it means:</strong> The Inspector could not connect to the Midnight indexer. This is usually a temporary network or service issue — your registration and NIGHT are not affected.</p>
-        <p class="mt-3 font-semibold text-slate-600 text-xs uppercase tracking-wide">What to do</p>
+      <div class="mt-4 space-y-2 text-sm">
+        <p><strong>What it means:</strong> The Inspector could not connect to the Midnight indexer. This is usually temporary — your registration and NIGHT are not affected.</p>
+        <p class="mt-3 font-semibold text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wide">What to do</p>
         <ol class="space-y-2 mt-1">
           <li class="flex gap-2"><span class="step-num">1</span><span>Wait 2–5 minutes and click <strong>Refresh</strong>.</span></li>
-          <li class="flex gap-2"><span class="step-num">2</span><span>If the error persists, check the <a href="https://github.com/MidnightCryptoFan/midnight-dust-inspector/issues" target="_blank" class="text-violet-600 underline">GitHub Issues</a> page to see if there is a known outage.</span></li>
-          <li class="flex gap-2"><span class="step-num">3</span><span>You can still view your on-chain registration history in the Timeline section, which uses Koios (independent of the Midnight indexer).</span></li>
+          <li class="flex gap-2"><span class="step-num">2</span><span>If it persists, check <a href="https://github.com/MidnightCryptoFan/midnight-dust-inspector/issues" target="_blank" class="text-violet-600 dark:text-violet-400 underline">GitHub Issues</a> for known outages.</span></li>
+          <li class="flex gap-2"><span class="step-num">3</span><span>The Cardano timeline section still works independently of the indexer.</span></li>
         </ol>
       </div>
     </section>
 
     <!-- ─── FAQ ──────────────────────────────────────────────────────────── -->
-    <section id="faq" class="rounded-xl bg-white border border-slate-200 p-5 shadow-sm scroll-mt-20">
-      <h2 class="text-base font-bold text-slate-800">Frequently Asked Questions</h2>
-      <div class="mt-4 divide-y divide-slate-100 text-sm text-slate-700">
+    <section id="faq" class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-5 shadow-sm scroll-mt-20">
+      <h2 class="text-base font-bold">Frequently Asked Questions</h2>
+      <div class="mt-4 divide-y divide-slate-100 dark:divide-slate-800 text-sm">
 
         <details class="py-3 group">
           <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
             Is this tool safe to use?
             <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
           </summary>
-          <p class="mt-2 text-slate-600 leading-6">Yes. The Inspector only reads public blockchain data. It never asks for your seed phrase or private keys. All Cardano lookups go through the public Koios API. The source code is open and auditable on GitHub.</p>
+          <p class="mt-2 text-slate-600 dark:text-slate-400 leading-6">Yes. The Inspector only reads public blockchain data. It never asks for your seed phrase or private keys. Source code is open and auditable on GitHub.</p>
         </details>
 
         <details class="py-3 group">
@@ -353,31 +374,23 @@
             Why does the Inspector show different data than my Midnight wallet?
             <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
           </summary>
-          <p class="mt-2 text-slate-600 leading-6">The Midnight indexer can lag behind the Cardano blockchain by minutes to hours. The Inspector shows you both: the indexer's current view AND the actual on-chain state from Koios, so you can spot any discrepancy.</p>
+          <p class="mt-2 text-slate-600 dark:text-slate-400 leading-6">The Midnight indexer can lag behind the Cardano blockchain by minutes to hours. The Inspector shows both: the indexer's current view and the actual on-chain state, so you can spot any discrepancy.</p>
         </details>
 
         <details class="py-3 group">
           <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
-            My locked NIGHT in the Vesting tile does not count toward DUST — is that correct?
+            My locked vesting NIGHT does not count toward DUST — is that correct?
             <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
           </summary>
-          <p class="mt-2 text-slate-600 leading-6">Yes. Locked vesting NIGHT sits at a script address and is excluded from the DUST cap calculation. Only NIGHT in your regular wallet addresses counts. Once you claim the vesting NIGHT and it arrives in your wallet, it will be included.</p>
+          <p class="mt-2 text-slate-600 dark:text-slate-400 leading-6">Yes. Locked vesting NIGHT sits at a script address and is excluded from the DUST cap. Only NIGHT in your regular wallet counts. After claiming, the unlocked NIGHT will be included.</p>
         </details>
 
         <details class="py-3 group">
           <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
-            I sent NIGHT to my wallet and now I see a duplicate registration. What happened?
-            <span class="text-slate-400 group-open:rotate-180 transition-term">▼</span>
-          </summary>
-          <p class="mt-2 text-slate-600 leading-6">This is a known behaviour: receiving NIGHT into an already-registered wallet can trigger an automatic re-registration by the protocol, resulting in two entries. De-register once and re-register to resolve it. See the <a href="#duplicate" class="text-violet-600 underline">Duplicate Registration</a> section above.</p>
-        </details>
-
-        <details class="py-3 group">
-          <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">
-            How often does the DUST balance update?
+            I sent NIGHT to my wallet and now see a duplicate registration. What happened?
             <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
           </summary>
-          <p class="mt-2 text-slate-600 leading-6">DUST accumulates continuously based on your generation rate. The balance visible in your Midnight wallet updates when the Midnight indexer processes the next block. The Inspector shows a snapshot at the time of the last check — use the Refresh button to get the latest data.</p>
+          <p class="mt-2 text-slate-600 dark:text-slate-400 leading-6">Receiving NIGHT into an already-registered wallet can trigger an automatic re-registration, resulting in two entries. De-register once and re-register to resolve it. See <a href="#duplicate" class="text-violet-600 dark:text-violet-400 underline">Duplicate Registration</a> above.</p>
         </details>
 
         <details class="py-3 group">
@@ -385,7 +398,7 @@
             Can I check someone else's stake address?
             <span class="text-slate-400 group-open:rotate-180 transition-transform">▼</span>
           </summary>
-          <p class="mt-2 text-slate-600 leading-6">Yes. All data shown is public. Enter any <code class="bg-slate-100 px-1 rounded text-xs">stake1…</code> address in the input field. You will see their NIGHT balance and registration state — but you will not be able to register or deregister on their behalf.</p>
+          <p class="mt-2 text-slate-600 dark:text-slate-400 leading-6">Yes. All data shown is public. Enter any <code class="bg-slate-100 dark:bg-slate-800 px-1 rounded text-xs">stake1…</code> address. You can view their state but cannot register or deregister on their behalf.</p>
         </details>
 
       </div>
