@@ -303,7 +303,7 @@
             Is this tool safe? Can it access my funds?
             <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform duration-150 ml-4 flex-shrink-0">▼</span>
           </summary>
-          <p class="px-4 pb-4 pt-1 text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">No. The Inspector only reads public blockchain data. It never asks for your seed phrase or private keys. Wallet connections use your browser extension (CIP-30), and all signing happens inside that extension. You can inspect any stake address without connecting a wallet at all. The source code is fully open on <a href="https://github.com/MidnightCryptoFan/midnight-dust-inspector" target="_blank" class="underline">GitHub</a>.</p>
+          <p class="px-4 pb-4 pt-1 text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">No. The Inspector only reads public blockchain data. It never asks for your seed phrase or private keys, and all signing happens inside your wallet extension. When you inspect a stake address, that public address is sent to the configured Midnight indexer and Cardano Koios endpoints so the app can fetch status and timeline data. You can inspect any stake address without connecting a wallet at all. The source code is fully open on <a href="https://github.com/MidnightCryptoFan/midnight-dust-inspector" target="_blank" class="underline">GitHub</a>.</p>
         </details>
 
         <details class="group bg-white dark:bg-slate-900">
