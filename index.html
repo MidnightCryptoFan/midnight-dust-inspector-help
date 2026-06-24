@@ -120,12 +120,14 @@
             <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform duration-150">▼</span>
           </summary>
           <div class="px-4 pb-5 pt-1 space-y-3 border-t border-slate-100 dark:border-slate-800">
-            <p class="text-slate-600 dark:text-slate-400">This happens when NIGHT arrives in an already-registered wallet — the protocol automatically creates a second registration entry. To fix it:</p>
+            <p class="text-slate-600 dark:text-slate-400">This happens when NIGHT arrives in an already-registered wallet — the protocol automatically creates a second registration entry. The Inspector can clean up all extra registrations at once:</p>
             <ol class="space-y-1.5 text-slate-600 dark:text-slate-400 pl-1">
-              <li>1. Connect your wallet and click <strong class="text-slate-800 dark:text-slate-200">Deregister</strong>.</li>
-              <li>2. Wait for on-chain confirmation (~5 minutes).</li>
-              <li>3. Once the Inspector shows "Not registered", click <strong class="text-slate-800 dark:text-slate-200">Register now</strong>.</li>
+              <li>1. Connect both your Cardano wallet and your Midnight wallet, then click <strong class="text-slate-800 dark:text-slate-200">Deregister</strong>.</li>
+              <li>2. The Inspector scans the Cardano contract directly and lists <strong class="text-slate-800 dark:text-slate-200">every active registration</strong> for your wallet, each with its DUST address. The one matching your connected Midnight wallet is marked <strong class="text-slate-800 dark:text-slate-200">✓ keep</strong>; the duplicates are pre-selected for removal.</li>
+              <li>3. Review the selection and confirm. Each removal is a <strong class="text-slate-800 dark:text-slate-200">separate transaction</strong>, so your wallet asks you to sign once per registration — a progress indicator shows "1 of 2", "2 of 2", and so on.</li>
+              <li>4. Wait for on-chain confirmation (~5 minutes). If you removed all registrations and the Inspector shows "Not registered", click <strong class="text-slate-800 dark:text-slate-200">Register now</strong> to register once.</li>
             </ol>
+            <p class="text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-3">Why one transaction each? The registration contract burns exactly one registration token per transaction, so multiple registrations cannot be removed in a single signature. The Inspector reads the live on-chain state (not the slower Midnight indexer), so it always knows how many registrations are really left.</p>
           </div>
         </details>
 
@@ -335,7 +337,7 @@
             Why does receiving NIGHT create a duplicate registration?
             <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform duration-150 ml-4 flex-shrink-0">▼</span>
           </summary>
-          <p class="px-4 pb-4 pt-1 text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">Known protocol behaviour. When new NIGHT arrives in an already-registered wallet, the protocol may automatically create a second registration. Deregister and re-register once to resolve it — see the <a href="#duplicate" class="underline">duplicate registration</a> section above.</p>
+          <p class="px-4 pb-4 pt-1 text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">Known protocol behaviour. When new NIGHT arrives in an already-registered wallet, the protocol may automatically create a second registration. The Deregister flow lists every active registration and lets you remove the duplicates in one pass while keeping the one that matches your wallet — see the <a href="#duplicate" class="underline">multiple registrations</a> section above.</p>
         </details>
 
         <details class="group bg-white dark:bg-slate-900">
