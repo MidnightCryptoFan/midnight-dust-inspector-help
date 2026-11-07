@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Midnight DUST Inspector — Help</title>
-  <meta name="inspector-version" content="0.6.2" />
-  <meta name="help-reviewed" content="2026-09-29" />
+  <meta name="inspector-version" content="0.7.1" />
+  <meta name="help-reviewed" content="2026-11-07" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html { scroll-behavior: smooth; }
@@ -44,7 +44,7 @@
       </div>
       <a href="https://midnight-dust-inspector.vercel.app" target="_blank"
          class="text-xs font-semibold text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 rounded px-3 py-1 hover:border-slate-500 dark:hover:border-slate-500 transition-colors">
-        Open Inspecto
+        Open Inspector
       </a>
     </div>
   </header>
@@ -98,6 +98,12 @@
               <p class="text-slate-600 dark:text-slate-400">Your Midnight wallet holds the maximum DUST for your NIGHT balance. Spend some DUST on the Midnight network — generation resumes automatically. No re-registration needed.</p>
             </div>
 
+            <div class="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">DUST grows, but this Cardano wallet is not registered</p>
+              <p class="text-slate-600 dark:text-slate-400">Do not register again. Connect the Midnight wallet, then use <strong class="text-slate-800 dark:text-slate-200">Find active source</strong>. The Inspector scans every live Cardano registration UTxO targeting that DUST address and verifies candidate stake addresses against Midnight's active registration data.</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">A green result is verified by the indexer or matched to the exact Cardano credential. If several candidates remain, inspect them individually — the Inspector will not guess from an unrelated transaction input.</p>
+            </div>
+
           </div>
         </details>
 
@@ -107,7 +113,7 @@
             <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform duration-150">▼</span>
           </summary>
           <div class="px-4 pb-5 pt-1 space-y-3 border-t border-slate-100 dark:border-slate-800">
-            <p class="text-slate-600 dark:text-slate-400">This is normal. The Midnight indexer lags behind the Cardano chain by minutes to several hours. Your transaction is already on-chain and will appear in the Inspector once the indexer catches up.</p>
+            <p class="text-slate-600 dark:text-slate-400">The Cardano transaction can be confirmed before Midnight's indexed state catches up. The Inspector therefore shows the Cardano registration output and Midnight status separately instead of treating either source as immediately final.</p>
             <div class="flex gap-2">
               <div class="tile"><div class="tile-label">Active Registration</div><div class="tile-value" style="color:#b45309">Deregistering…</div><div class="tile-sub">indexer syncing</div></div>
             </div>
@@ -121,14 +127,14 @@
             <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform duration-150">▼</span>
           </summary>
           <div class="px-4 pb-5 pt-1 space-y-3 border-t border-slate-100 dark:border-slate-800">
-            <p class="text-slate-600 dark:text-slate-400">This happens when NIGHT arrives in an already-registered wallet — the protocol automatically creates a second registration entry. The Inspector can clean up all extra registrations at once:</p>
+            <p class="text-slate-600 dark:text-slate-400">Receiving NIGHT does not automatically create a second registration. This warning means the Midnight indexer data or the Cardano registration contract actually contains more than one active mapping for the stake account. The Inspector can clean up confirmed extras at once:</p>
             <ol class="space-y-1.5 text-slate-600 dark:text-slate-400 pl-1">
               <li>1. Connect both your Cardano wallet and your Midnight wallet, then click <strong class="text-slate-800 dark:text-slate-200">Deregister</strong>.</li>
               <li>2. The Inspector scans the Cardano contract directly and lists <strong class="text-slate-800 dark:text-slate-200">every active registration</strong> for your wallet, each with its DUST address. The one matching your connected Midnight wallet is marked <strong class="text-slate-800 dark:text-slate-200">✓ keep</strong>; the duplicates are pre-selected for removal.</li>
               <li>3. Review the selection and confirm. All selected registrations are removed in a <strong class="text-slate-800 dark:text-slate-200">single transaction</strong>, so your wallet asks you to sign just once.</li>
               <li>4. Wait for on-chain confirmation (~5 minutes). If you removed all registrations and the Inspector shows "Not registered", click <strong class="text-slate-800 dark:text-slate-200">Register now</strong> to register once.</li>
             </ol>
-            <p class="text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-3">The Inspector reads the live on-chain state (not the slower Midnight indexer), so it always knows how many registrations are really left, and verifies each one belongs to your wallet before removing it.</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-3">Version 0.7.1 combines both sources: Midnight's structured <code class="font-mono">dustGenerations</code> records show every active mapping and validity flag, while the Cardano scan confirms the live registration UTxOs. Unknown registrations are not pre-selected for removal.</p>
           </div>
         </details>
 
@@ -159,9 +165,9 @@
               <div class="tile"><div class="tile-label">Active Registration</div><div class="tile-value" style="color:#15803d">Registered</div><div class="tile-sub">DUST is generating</div></div>
             </div>
             <dl class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
-              <div><dt class="font-medium text-slate-800 dark:text-slate-200">Night Balance</dt><dd class="mt-0.5">Unlocked NIGHT in your wallet. Determines your DUST generation rate and maximum cap (5× NIGHT).</dd></div>
+              <div><dt class="font-medium text-slate-800 dark:text-slate-200">Night Balance</dt><dd class="mt-0.5">Eligible cNIGHT found under the inspected Cardano account. Only eligible UTxOs covered by a valid registration contribute to DUST generation and capacity.</dd></div>
               <div><dt class="font-medium text-slate-800 dark:text-slate-200">Airdrop Vesting</dt><dd class="mt-0.5">Locked NIGHT held in the vesting contract. Shown separately and does not count toward the cap until claimed.</dd></div>
-              <div><dt class="font-medium text-slate-800 dark:text-slate-200">Active Registration</dt><dd class="mt-0.5">Your current registration state. Green "Registered" means DUST is accumulating right now.</dd></div>
+              <div><dt class="font-medium text-slate-800 dark:text-slate-200">Active Registration</dt><dd class="mt-0.5">The indexed mapping state. One valid mapping is expected; connect the Midnight wallet to compare its live DUST address and balance before concluding that DUST is moving.</dd></div>
               <div><dt class="font-medium text-slate-800 dark:text-slate-200">Timeline</dt><dd class="mt-0.5">Full on-chain history of every registration and deregistration for your stake key.</dd></div>
             </dl>
           </div>
@@ -182,17 +188,22 @@
 
         <div>
           <dt class="font-medium text-slate-800 dark:text-slate-200 mb-1">What is DUST?</dt>
-          <dd class="text-slate-600 dark:text-slate-400">DUST is the native utility token of Midnight, used to pay for transactions on the network. It accumulates automatically in your Midnight wallet once you register a Cardano stake key that holds NIGHT. You do not need to manually claim it — it builds up on its own.</dd>
+          <dd class="text-slate-600 dark:text-slate-400">DUST is Midnight's non-transferable transaction-fee resource. A valid Cardano registration maps eligible cNIGHT to a Midnight DUST address, where DUST regenerates up to its capacity. It cannot be sent between wallets like a normal token.</dd>
         </div>
 
         <div>
           <dt class="font-medium text-slate-800 dark:text-slate-200 mb-1">What is the Midnight indexer?</dt>
-          <dd class="text-slate-600 dark:text-slate-400">The Midnight indexer reads Cardano chain data and reports registration states to the Midnight network. The Inspector queries this indexer to show your current status. Because it processes blocks after the fact, it can lag behind the actual Cardano chain by minutes to hours. The Inspector also reads the Cardano chain directly via Koios so you can see both views side by side.</dd>
+          <dd class="text-slate-600 dark:text-slate-400">Midnight observes stable Cardano events and exposes the resulting DUST state through its indexer. The Inspector reads that state through a server-side Blockfrost relay and checks Cardano registration UTxOs through Koios, so delays or disagreement remain visible instead of being hidden.</dd>
         </div>
 
         <div>
           <dt class="font-medium text-slate-800 dark:text-slate-200 mb-1">What is a DUST address?</dt>
-          <dd class="text-slate-600 dark:text-slate-400">Your DUST address is where generated DUST is sent on the Midnight network. It belongs to your Midnight wallet. When you register, you link your Cardano stake key to this address. If you connect a Midnight wallet to the Inspector, it verifies that the registered DUST address matches your connected wallet — a mismatch means DUST may be going elsewhere.</dd>
+          <dd class="text-slate-600 dark:text-slate-400">Your DUST address belongs to your Midnight wallet and receives regenerated DUST. Midnight DApp Connector v4 exposes this address and its balance, but not the linked Cardano stake address. The Inspector fills that gap by comparing the address with structured Midnight mappings and the Cardano registration contract.</dd>
+        </div>
+
+        <div>
+          <dt class="font-medium text-slate-800 dark:text-slate-200 mb-1">What changed with Ledger 9?</dt>
+          <dd class="text-slate-600 dark:text-slate-400">Midnight Mainnet moved to Ledger 9 on 6 November 2026. Existing Mainnet registrations were replayed at the same DUST address and full capacity, so the upgrade alone is not a reason to register again. Use an updated Wallet SDK 2-compatible wallet; the Inspector uses the current indexer schema and its structured <code class="font-mono">dustGenerations</code> records.</dd>
         </div>
 
       </dl>
@@ -205,17 +216,17 @@
 
         <div>
           <dt class="font-medium text-slate-800 dark:text-slate-200 mb-1">What is a stake address?</dt>
-          <dd class="text-slate-600 dark:text-slate-400">A stake address (starting with <code class="font-mono bg-slate-100 dark:bg-slate-800 px-1 rounded text-xs">stake1…</code>) represents your staking identity on Cardano. All payment addresses in the same wallet share one stake address. NIGHT held across all those payment addresses is summed together to determine your DUST generation rate and cap. You can find your stake address in your Cardano wallet under Receive, Account, or Staking.</dd>
+          <dd class="text-slate-600 dark:text-slate-400">A stake address (starting with <code class="font-mono bg-slate-100 dark:bg-slate-800 px-1 rounded text-xs">stake1…</code>) represents a Cardano staking account and groups its payment addresses. The Inspector uses it to find eligible cNIGHT and registration history, but only cNIGHT UTxOs covered by a valid mapping contribute to DUST. You can find the address under Receive, Account, or Staking in your Cardano wallet.</dd>
         </div>
 
         <div>
           <dt class="font-medium text-slate-800 dark:text-slate-200 mb-1">What is NIGHT?</dt>
-          <dd class="text-slate-600 dark:text-slate-400">NIGHT is a token that lives on Cardano and powers DUST generation: the more unlocked NIGHT under your registered stake key, the faster DUST accumulates and the higher your cap. Locked NIGHT — held in the vesting contract — does not count toward the cap until you claim it into your regular wallet.</dd>
+          <dd class="text-slate-600 dark:text-slate-400">NIGHT is a Cardano native token. Eligible cNIGHT UTxOs associated with a valid registration determine DUST generation and capacity. Locked NIGHT in the vesting contract is shown separately and does not become eligible until it is claimed into the Cardano wallet.</dd>
         </div>
 
         <div>
           <dt class="font-medium text-slate-800 dark:text-slate-200 mb-1">What is registration?</dt>
-          <dd class="text-slate-600 dark:text-slate-400">Registration is an on-chain Cardano transaction that links your stake key to a Midnight DUST address. Once registered, the Midnight network knows where to send your DUST. You only need one active registration. Multiple active registrations from the same stake key cause conflicts — the Inspector warns you if it detects this.</dd>
+          <dd class="text-slate-600 dark:text-slate-400">Registration creates a Cardano contract output that maps an authorized Cardano payment credential to a Midnight DUST address. Exactly one active mapping is expected for a stake account. Version 0.7.1 lists every mapping reported by Midnight and cross-checks its live Cardano UTxO before suggesting cleanup.</dd>
         </div>
 
         <div>
@@ -229,7 +240,7 @@
     <!-- ─── WALLETS ─────────────────────────────────────────────────────────── -->
     <section id="wallets" class="scroll-mt-20">
       <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100 mb-1">Wallets</h2>
-      <p class="text-sm text-slate-500 mb-5">The Inspector connects via CIP-30, the standard Cardano dApp connector.</p>
+      <p class="text-sm text-slate-500 mb-5">The Inspector uses CIP-30 for Cardano wallets and read-only DApp Connector v4 methods for Midnight wallets.</p>
 
       <div class="space-y-5 text-sm">
 
@@ -274,6 +285,7 @@
             <div><dt class="font-medium text-slate-700 dark:text-slate-300">Multiple wallets installed</dt><dd class="mt-0.5">Disable all but one in your browser extension settings to avoid conflicts.</dd></div>
             <div><dt class="font-medium text-slate-700 dark:text-slate-300">Transaction rejected</dt><dd class="mt-0.5">Make sure your wallet holds at least 2–3 ADA to cover fees. Registration transactions are cheap but not free.</dd></div>
             <div><dt class="font-medium text-slate-700 dark:text-slate-300">Wrong network</dt><dd class="mt-0.5">Ensure your wallet is set to Cardano Mainnet, not a testnet.</dd></div>
+            <div><dt class="font-medium text-slate-700 dark:text-slate-300">Midnight state looks outdated after Ledger 9</dt><dd class="mt-0.5">Update the Midnight wallet extension to a Wallet SDK 2-compatible release, reload the page, and compare the connected DUST address again. Do not register again solely because of the upgrade.</dd></div>
             <div><dt class="font-medium text-slate-700 dark:text-slate-300">Signing popup does not appear</dt><dd class="mt-0.5">Check whether your browser is blocking popups for this site and allow them.</dd></div>
           </dl>
         </div>
@@ -285,7 +297,7 @@
     <section id="support" class="scroll-mt-20">
       <h2 class="text-base font-semibold text-slate-900 dark:text-slate-100 mb-3">Support this tool</h2>
       <div class="text-sm space-y-3 text-slate-600 dark:text-slate-400">
-        <p>This is a free, open-source community tool. It may load Vercel Analytics and Speed Insights. Public stake addresses are sent to the configured Midnight indexer and Cardano Koios endpoints when you inspect them.</p>
+        <p>This is a free, open-source community tool. It may load Vercel Analytics and Speed Insights. Public stake addresses pass through the Inspector's server routes to Blockfrost's Midnight indexer and Cardano Koios when you inspect them. The shared Blockfrost project token remains server-only; visitors do not need an API key or paid account.</p>
         <p>If you find it useful, you can send a tip — ADA or NIGHT — to the address below. Starring the repo or sharing the Inspector in the Midnight Discord is just as helpful.</p>
         <div class="border border-slate-200 dark:border-slate-800 rounded-lg p-4 space-y-2">
           <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Tip address · ADA / NIGHT</p>
@@ -306,7 +318,7 @@
             Is this tool safe? Can it access my funds?
             <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform duration-150 ml-4 flex-shrink-0">▼</span>
           </summary>
-          <p class="px-4 pb-4 pt-1 text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">No. The Inspector only reads public blockchain data. It never asks for your seed phrase or private keys, and all signing happens inside your wallet extension. When you inspect a stake address, that public address is sent to the configured Midnight indexer and Cardano Koios endpoints so the app can fetch status and timeline data. You can inspect any stake address without connecting a wallet at all. The source code is fully open on <a href="https://github.com/MidnightCryptoFan/midnight-dust-inspector" target="_blank" class="underline">GitHub</a>.</p>
+          <p class="px-4 pb-4 pt-1 text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">No. The Inspector reads public blockchain data and never asks for seed phrases or private keys; signing stays inside the wallet extension. Public stake addresses pass through the app's server routes to Blockfrost and Koios. The Blockfrost project token is not exposed to the browser. You can inspect any stake address without connecting a wallet, and the source is open on <a href="https://github.com/MidnightCryptoFan/midnight-dust-inspector" target="_blank" class="underline">GitHub</a>.</p>
         </details>
 
         <details class="group bg-white dark:bg-slate-900">
@@ -330,15 +342,15 @@
             Do I need a Midnight wallet to use this tool?
             <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform duration-150 ml-4 flex-shrink-0">▼</span>
           </summary>
-          <p class="px-4 pb-4 pt-1 text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">No. Entering a stake address shows everything without any wallet. Connecting a Cardano wallet adds the ability to register and deregister. Connecting a Midnight wallet adds a live DUST balance and lets the Inspector verify your registered DUST address.</p>
+          <p class="px-4 pb-4 pt-1 text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">No. Entering a stake address shows its public Cardano and Midnight status. Connecting a Cardano wallet adds registration actions. Connecting a Midnight wallet adds its live DUST address and balance, enables destination comparison, and lets <strong>Find active source</strong> search for the Cardano account behind that DUST address.</p>
         </details>
 
         <details class="group bg-white dark:bg-slate-900">
           <summary class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors font-medium">
-            Why does receiving NIGHT create a duplicate registration?
+            Does receiving NIGHT create a duplicate registration?
             <span class="text-slate-400 text-xs group-open:rotate-180 transition-transform duration-150 ml-4 flex-shrink-0">▼</span>
           </summary>
-<p class="px-4 pb-4 pt-1 text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">Receiving NIGHT does not by itself establish that a duplicate registration was created. Check the active Cardano registration outputs and compare their DUST destination first. Removing or creating registrations submits a Cardano transaction and may cost fees; do not do so based only on a balance change or waiting period.</p>
+          <p class="px-4 pb-4 pt-1 text-slate-600 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">No. Receiving NIGHT does not create a registration. Version 0.7.1 only reports a duplicate when structured Midnight mapping records or live Cardano registration outputs show more than one active mapping. Registration changes require a Cardano transaction and may cost fees, so never clean up based only on a balance change.</p>
         </details>
 
         <details class="group bg-white dark:bg-slate-900">
